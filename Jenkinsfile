@@ -36,7 +36,7 @@ pipeline {
 		  dir('ansible') {
 			echo 'Esperando 5 seg a que la red del servidor se estabilice'
 			sleep 5
-			sh 'ansible-playbook -i hosts.ini playbook. yml'
+			sh 'ansible-playbook -i hosts.ini playbook.yml'
 		  }
 		}
 	}

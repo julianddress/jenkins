@@ -3,6 +3,15 @@ pipeline {
 
     stages {
 
+        stage('Verificar herramientas') {
+            steps {
+                bat 'where terraform'
+                bat 'terraform --version'
+                bat 'where ansible-playbook'
+                bat 'ansible-playbook --version'
+            }
+        }
+
         stage('1. Auditoria de Codigo (Linting)') {
             steps {
                 echo 'Validando sintaxis de Terraform y Ansible ...'
@@ -28,7 +37,8 @@ pipeline {
 
         stage('3. Aprobacion Manual (Gatekeeper)') {
             steps {
-                input message: '¿El terraform plan se ve correcto? Aprobar infraestructura', ok: 'Aprobar y desplegar'
+                input message: '¿El terraform plan se ve correcto? Aprobar infraestructura',
+                      ok: 'Aprobar y desplegar'
             }
         }
 

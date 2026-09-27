@@ -12,14 +12,6 @@ pipeline {
             }
         }
 
-		stage('Verificar herramientas') {
-			steps {
-				bat 'where terraform'
-				bat 'terraform --version'
-				bat 'wsl ansible-playbook --version'
-			}
-		}
-
         stage('1. Auditoria de Codigo (Linting)') {
             steps {
                 echo 'Validando sintaxis de Terraform y Ansible ...'

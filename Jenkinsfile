@@ -21,7 +21,7 @@ pipeline {
 
 	stage('3. Aprobacion Manual (Gatekeeper)') {
 		steps {
-		  input mensaje: 'El terraform plan se ve correcto? Aprobar infraestructura', ok: 'Aprobar y desp'
+		  input message: 'El terraform plan se ve correcto? Aprobar infraestructura', ok: 'Aprobar y desp'
 		}
 	}
 

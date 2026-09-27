@@ -6,16 +6,16 @@ pipeline {
 		steps {
 		 echo 'Validando sintaxis de Terraform y Ansible ... '
 		 dir('terraform' ) { sh 'terraform validate'}
-		 dir('ansible') { sh 'ansible-playbook -- syntax-check playbook. yml' }
+		 dir('ansible') { sh 'ansible-playbook -- syntax-check playbook.yml' }
 		}
 	}
 
 	stage('2. Planificacion (Terraform Plan) ') {
 	      steps {
-		dir('terraform' ) {
-		  sh 'terraform init'
-		  sh 'terraform plan'
-		}
+			dir('terraform' ) {
+			sh 'terraform init'
+			sh 'terraform plan'
+			}
 	      }
 	}
 

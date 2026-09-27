@@ -4,27 +4,26 @@ pipeline {
     stages {
 
         stage('Verificar herramientas') {
-            steps {
-                bat 'where terraform'
-                bat 'terraform --version'
-                bat 'where ansible-playbook'
-                bat 'ansible-playbook --version'
-            }
-        }
+			steps {
+				bat 'where terraform'
+				bat 'terraform --version'
+				bat 'wsl ansible-playbook --version'
+			}
+		}
 
         stage('1. Auditoria de Codigo (Linting)') {
-            steps {
-                echo 'Validando sintaxis de Terraform y Ansible ...'
+			steps {
+				echo 'Validando sintaxis de Terraform y Ansible ...'
 
-                dir('terraform') {
-                    bat 'terraform validate'
-                }
+				dir('terraform') {
+					bat 'terraform validate'
+				}
 
-                dir('ansible') {
-                    bat 'wsl ansible-playbook --syntax-check playbook.yml'
-                }
-            }
-        }
+				dir('ansible') {
+					bat 'wsl ansible-playbook --syntax-check playbook.yml'
+				}
+			}
+		}
 
         stage('2. Planificacion (Terraform Plan)') {
             steps {

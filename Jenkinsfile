@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	
 	stages {
-	  stage('1. Auditoria de Codigo (Linting')) {
+	  stage('1. Auditoria de Codigo (Linting)') {
 		steps {
 		 echo 'Validando sintaxis de Terraform y Ansible ... '
 		 dir('terraform' ) { sh 'terraform validate'}

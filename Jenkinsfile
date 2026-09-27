@@ -12,6 +12,14 @@ pipeline {
             }
         }
 
+		stage('Verificar herramientas') {
+			steps {
+				bat 'where terraform'
+				bat 'terraform --version'
+				bat 'wsl ansible-playbook --version'
+			}
+		}
+
         stage('1. Auditoria de Codigo (Linting)') {
             steps {
                 echo 'Validando sintaxis de Terraform y Ansible ...'
@@ -21,7 +29,7 @@ pipeline {
                 }
 
                 dir('ansible') {
-                    bat 'ansible-playbook --syntax-check playbook.yml'
+                    bat 'wsl ansible-playbook --syntax-check playbook.yml'
                 }
             }
         }
@@ -51,13 +59,13 @@ pipeline {
         }
 
         stage('5. Configuracion Ansible') {
-            steps {
-                dir('ansible') {
-                    echo 'Esperando 5 segundos a que la red del servidor se estabilice...'
-                    sleep time: 5, unit: 'SECONDS'
-                    bat 'ansible-playbook -i hosts.ini playbook.yml'
-                }
-            }
-        }
+			steps {
+				dir('ansible') {
+					echo 'Esperando 5 segundos a que la red del servidor se estabilice...'
+					sleep time: 5, unit: 'SECONDS'
+					bat 'wsl ansible-playbook -i hosts.ini playbook.yml'
+				}
+			}
+		}
     }
 }

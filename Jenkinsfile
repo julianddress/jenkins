@@ -16,6 +16,7 @@ pipeline {
 				echo 'Validando sintaxis de Terraform y Ansible ...'
 
 				dir('terraform') {
+                    bat 'terraform init -backend=false'
 					bat 'terraform validate'
 				}
 
